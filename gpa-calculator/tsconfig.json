@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",  // This is necessary for React JSX syntax support
+    "moduleResolution": "node",
+    "target": "es5",      // or "es6" depending on your needs
+    "esModuleInterop": true,
+    "strict": true,       // Optional: enables strict type-checking
+    "skipLibCheck": true  // Optional: speeds up builds by skipping type checks for declaration files
+  }
+}

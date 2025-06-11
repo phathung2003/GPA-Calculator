@@ -16,7 +16,6 @@ git clone https://github.com/phathung2003/GPA-Calculator.git
 ## 2. Install dependencies
 ```bash
 cd GPA-Calculator
-cd gpa-calculator
 
 npm install
 # or

@@ -18,8 +18,6 @@ git clone https://github.com/phathung2003/GPA-Calculator.git
 cd GPA-Calculator
 
 npm install
-# or
-yarn install
 ```
 
 <br>
@@ -152,7 +150,8 @@ Set-ExecutionPolicy Restricted -Scope CurrentUser
 
 ## 3. Run the project
 ```bash
-npm start
+npm run build
+npm run start
 ```
 <br>
 

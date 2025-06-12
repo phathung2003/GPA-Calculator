@@ -111,6 +111,7 @@ At line:1 char:1
     + FullyQualifiedErrorId : UnauthorizedAccess
 ```
 > It mean PowerShell on Windows blocks the execution of scripts, including the npm.ps1 file, for security reasons. This is a common error when using PowerShell to run commands like npm, yarn, npx, etc.
+>
 > Follow the steps below to fix the issue.
 
 <br>

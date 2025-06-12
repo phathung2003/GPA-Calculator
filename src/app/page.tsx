@@ -1,6 +1,7 @@
+"use client";
 import React, { useState } from 'react';
-import './css/App.css';
-import { creditRequirement } from './logic/gpa-calculate';
+import '../css/App.css';
+import { creditRequirement } from '../logic/gpa-calculate';
 
 interface ScoreInfo {
   currentGPA: number;

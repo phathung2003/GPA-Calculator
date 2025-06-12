@@ -1,10 +1,37 @@
 {
   "compilerOptions": {
-    "jsx": "react-jsx",  // This is necessary for React JSX syntax support
+    "jsx": "preserve", // This is necessary for React JSX syntax support
     "moduleResolution": "node",
-    "target": "es5",      // or "es6" depending on your needs
+    "target": "es5", // or "es6" depending on your needs
     "esModuleInterop": true,
-    "strict": true,       // Optional: enables strict type-checking
-    "skipLibCheck": true  // Optional: speeds up builds by skipping type checks for declaration files
-  }
+    "strict": true, // Optional: enables strict type-checking
+    "skipLibCheck": true // Optional: speeds up builds by skipping type checks for declaration files
+    ,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "incremental": true,
+    "module": "esnext",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": [
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

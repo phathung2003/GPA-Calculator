@@ -24,7 +24,10 @@ yarn install
 
 <br>
 
-> If you see this error:
+You may get these errors while doing this:
+<br>
+🔴 **Situation 1: Nodejs error** 
+> If you see this error message:
 ```bash
 'npm' is not recognized as an internal or external command, operable program or batch file.
 ```
@@ -96,11 +99,60 @@ After verifying the versions, you can proceed to retry the **Install dependencie
 
 <br>
 
+🔴 **Situation 2: PowerShell blocks the execution of scripts** 
+> If you see this error message:
+```bash
+npm : File C:\Program Files\nodejs\npm.ps1 cannot be loaded because running scripts is disabled on this system. For more information, see about_Execution_Policies at 
+https:/go.microsoft.com/fwlink/?LinkID=135170.
+At line:1 char:1
++ npm install
++ ~~~
+    + CategoryInfo          : SecurityError: (:) [], PSSecurityException
+    + FullyQualifiedErrorId : UnauthorizedAccess
+```
+> It mean PowerShell on Windows blocks the execution of scripts, including the npm.ps1 file, for security reasons. This is a common error when using PowerShell to run commands like npm, yarn, npx, etc.
+> Follow the steps below to fix the issue.
+
+<br>
+
+### >_ Step 1: Open PowerShell as Administrator
+1. Press **Windows + S** and search for: **Powershell**
+
+2. Right-click **Windows PowerShell** → **Run as administrator**
+
+<br>
+
+### ⌨️ Step 2: Run the script
+> In the PowerShell window, run the following command:
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+```
+- Scope CurrentUser: Applies only to your user account (safer).
+- ExecutionPolicy RemoteSigned: Allows local scripts to run; downloaded scripts must be signed.
+
+<br>
+
+### ✅ Step 3: Confirm the change
+When prompted, type Y (for Yes) and press Enter.
+
+<br>
+
+### 🔄 Final Step: Retry
+Close the PowerShell window and retry the **Install dependencies** process again.
+
+<br>
+
+> If you want to revert to the default then repeat the process but in **Step 2** , run the following command instead:
+```powershell
+Set-ExecutionPolicy Restricted -Scope CurrentUser
+```
+
+<br>
+
 ## 3. Run the project
 ```bash
 npm start
 ```
-
 <br>
 
 # 📜 License

@@ -13,6 +13,14 @@ header {
   color: white;
 }
 
+footer {
+  background-color:aliceblue;
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+}
 main {
   min-height: 80vh;
 }

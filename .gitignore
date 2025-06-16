@@ -1,23 +1,46 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Next.js build output
+.next/
+out/
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
+# Dependency directories
+node_modules/
 
-# testing
-/coverage
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
-# production
-/build
-
-# misc
-.DS_Store
+# Local env files
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# Vercel deployment
+.vercel/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Optional: Mac system file
+.AppleDouble
+
+# Optional: Windows thumbnail cache
+ehthumbs.db
+
+# Optional: dotenv backup
+.env.backup
+
+# Optional: local testing / temp
+*.log
+*.tsbuildinfo
+
+# Optional: If you use TurboRepo or similar
+turbo/

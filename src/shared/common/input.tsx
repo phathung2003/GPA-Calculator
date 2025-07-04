@@ -1,6 +1,6 @@
-import "../css/form.css";
+import "../../css/form.css";
 
-export function scoreInput(
+export function numberInput(
   lable: string,
   nameInput: string,
   valueInput: string,

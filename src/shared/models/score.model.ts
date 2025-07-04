@@ -1,3 +1,4 @@
+
 export interface Score {
   subject: string;
   GPA: number | null;

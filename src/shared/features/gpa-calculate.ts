@@ -1,5 +1,6 @@
-import { roundNumber } from "../utilities/numberUtils";
-import { GPARequirement } from "../models/gpa.model";
+import { roundNumber } from "../../utilities/number.utils";
+import { GPARequirement } from "../../shared/models/gpa.model";
+import { IMPROVEMENT_RESULT } from "../enums/improveResult.enums";
 
 // Điểm GPA khả dụng
 const POSIBLE_GRADE: number[] = [1, 1.5, 2, 2.5, 3, 3.5, 4];
@@ -20,6 +21,7 @@ export function GPAImproveRequirement(
       totalScoreRequired: 0,
       creditNeeded: 0,
       minSubjectGPA: 0,
+      improvementResult: IMPROVEMENT_RESULT.NO_NEED,
     };
   }
 
@@ -50,6 +52,7 @@ export function GPAImproveRequirement(
             totalScoreRequired: totalGPACalculate(newGPA, newCredit + 1),
             creditNeeded: newCredit + 1,
             minSubjectGPA: grade,
+            improvementResult: IMPROVEMENT_RESULT.NEED_IMPROVE,
           };
         }
       }
@@ -61,6 +64,7 @@ export function GPAImproveRequirement(
     totalScoreRequired: -1,
     creditNeeded: -1,
     minSubjectGPA: -1,
+    improvementResult: IMPROVEMENT_RESULT.IMPOSSIBLE,
   };
 }
 

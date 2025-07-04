@@ -1,10 +1,16 @@
-import { ScoreImproveForm } from "../models/score.model";
+import { ScoreImproveForm } from "../shared/models/score.model";
 
-const REGEX_POSITIVE_NUMBER = /[^0-9\.]/g; // Lọc bỏ tất cả các ký tự không phải là số hoặc dấu chấm
+
+const REGEX_DECIMAL_POSITIVE_NUMBER = /[^0-9\.]/g;
+const REGEX_INTEGER_POSITIVE_NUMBER = /[^0-9]/g; // Lọc bỏ tất cả các ký tự không phải là số hoặc dấu chấm
 
 // Kiểm tra dữ liệu có phải là số dương không
-export function filterPositiveNumber(value: string): string {
-  return value.replace(REGEX_POSITIVE_NUMBER, "");
+export function filterIntegerPositiveNumber(value: string): string {
+  return value.replace(REGEX_INTEGER_POSITIVE_NUMBER, "");
+}
+
+export function filterDecimalPositiveNumber(value: string): string {
+  return value.replace(REGEX_DECIMAL_POSITIVE_NUMBER, "");
 }
 
 // Kiểm tra dữ liệu có nhập chưa

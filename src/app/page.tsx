@@ -1,81 +1,83 @@
 "use client";
+
 import React, { useState } from "react";
-import "../css/main.css";
-import { creditRequirement } from "../logic/gpa-calculate";
-import { ScoreInfo } from "../models/score.model";
+import "../css/form.css";
+import { GPAImproveRequirement } from "../features/gpa-calculate";
+import { ScoreImproveForm, INITIAL_SCORE_FORM } from "../models/score.model";
+import {
+  filterPositiveNumber,
+  isScoreInputValid,
+} from "../utilities/numberUtils";
+import { scoreInput } from "../components/input";
 
 // Đánh phiên bản: Số đời chính.Chức năng.Chỉnh sửa-Giai đoạn
 function App() {
-  const [score, setScore] = useState<ScoreInfo>({
-    currentGPA: 0,
-    credit: 0,
-    targetGPA: 0,
-  });
+  const [score, setScore] = useState<ScoreImproveForm>(INITIAL_SCORE_FORM);
+  const [credit, setCredit] =
+    useState<ReturnType<typeof GPAImproveRequirement>>();
 
-  const [credit, setCredit] = useState<[number, number]>([0, 0]);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-
-    setScore((prevInput) => ({
-      ...prevInput,
-      [name]: parseFloat(value), // Chuyển thành số thực
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setScore((prevScore) => ({
+      ...prevScore,
+      [name]: filterPositiveNumber(value),
     }));
   };
 
   const onSubmit = (event: React.FormEvent<HTMLButtonElement>) => {
-    event.preventDefault(); // Ngăn tải lại trang
-    setCredit(
-      creditRequirement(score.currentGPA, score.credit, score.targetGPA)
-    );
+    event.preventDefault();
+    if (isScoreInputValid(score)) {
+      setCredit(
+        GPAImproveRequirement(
+          Number(score.currentGPA),
+          Number(score.currentCredit),
+          Number(score.targetGPA)
+        )
+      );
+    } else {
+      setCredit(undefined);
+    }
   };
 
   return (
     <div>
       <form>
         {/* Điểm GPA hiện tại */}
-        <div>
-          <label htmlFor="currentGPA">Điểm GPA hiện tại: </label>
-          <input
-            type="number"
-            id="currentGPA"
-            name="currentGPA"
-            value={score.currentGPA}
-            onChange={handleChange}
-          />
-        </div>
+        {scoreInput(
+          "Điểm GPA hiện tại",
+          "currentGPA",
+          score.currentGPA,
+          handleChange
+        )}
 
         {/* Số tín chỉ hiện tại */}
-        <div>
-          <label htmlFor="credit">Số tín chỉ hiện tại: </label>
-          <input
-            type="number"
-            id="credit"
-            name="credit"
-            value={score.credit}
-            onChange={handleChange}
-          />
-        </div>
+        {scoreInput(
+          "Số tín chỉ hiện tại",
+          "currentCredit",
+          score.currentCredit,
+          handleChange
+        )}
 
         {/* Điểm GPA mong muốn */}
-        <div>
-          <label htmlFor="targetGPA">Điểm GPA mong muốn: </label>
-          <input
-            type="number"
-            id="targetGPA"
-            name="targetGPA"
-            value={score.targetGPA}
-            onChange={handleChange}
-          />
-        </div>
+        {scoreInput(
+          "Điểm GPA mong muốn",
+          "targetGPA",
+          score.targetGPA,
+          handleChange
+        )}
+
         <button type="button" onClick={onSubmit}>
           Ước tính số tín cải thiện
         </button>
       </form>
       <p>
-        {credit[0] === -1 || credit[1] === -1
+        {!credit
+          ? "Chưa tính toán"
+          : credit.totalScoreRequired === 0
+          ? "Không cần cải thiện"
+          : credit.totalScoreRequired === -1
           ? "Không thể cải thiện"
-          : `Đạt ${credit[0]} tín chỉ với điểm GPA là ${credit[1]} điểm.`}
+          : `Đạt ${credit.creditNeeded} tín chỉ với điểm GPA là ${credit.minSubjectGPA} điểm.`}
       </p>
     </div>
   );

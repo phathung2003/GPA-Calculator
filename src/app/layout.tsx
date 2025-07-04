@@ -1,6 +1,5 @@
-import copyright from "../logic/hook/copyright";
+import copyright from "../hook/copyright";
 import "../css/main.css";
-import "../css/index.css";
 
 export const metadata = {
   title: "GPA Calculator",
